@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ "${EUID}" -eq 0 ]] || sudo $0 $@
+[[ "${EUID}" -eq 0 ]] || exec sudo $0 $@
 
 apt update && apt upgrade
 apt install -y \
