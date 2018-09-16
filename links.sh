@@ -1,12 +1,12 @@
 #!/bin/bash
 
 folowing=(
-    vim/
+    vim
     config/fish/fishfile
 )
 
 for file in ${folowing[*]};do
-    [ -f ${HOME}/.${file}.bak ] && rm -r ${HOME}/.${file}.bak  
-    [ -f ${HOME}/.${file} ] && mv ${HOME}/.${file}.bak
+    [ -e ${HOME}/.${file}.bak ] && rm -r ${HOME}/.${file}.bak
+    [ -e ${HOME}/.${file} ] && mv ${HOME}/.${file} ${HOME}/.${file}.bak
     ln -s ${PWD}/${file} ${HOME}/.${file}
 done
