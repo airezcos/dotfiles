@@ -1,0 +1,40 @@
+#!/bin/bash
+
+[[ ${EUID} -eq 0 ]] || exec sudo $0 $@ 
+
+mountpoint='/mnt/btrfs'
+device='/dev/sda2'
+snapname=`date +%Y-%m-%d_%H:%M`
+
+usage()
+{
+    echo "$0 [ name {snapname} ] [ -h | --help | usage ]"
+}
+
+usage_err()
+{
+    usage; exit 1
+}
+
+while [[ "$1" != "" ]]; do 
+    case $1 in
+        name )
+            shift
+            [[ $1 != "" ]] || usage_err
+            snapname=$1
+            ;;
+        -h|--help|usage )
+            usage
+            exit
+            ;;
+        * )
+            echo 'invalid argument'
+            usage_err
+            ;;
+    esac
+    shift
+done
+
+mount -o subvol=/ ${device} ${mountpoint}
+btrfs subvolume snapshot -r / ${mountpoint}/snapshots/${snapname}
+umount ${mountpoint}
