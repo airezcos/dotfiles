@@ -3,6 +3,7 @@
 folowing=(
     vim
     config/fish/fishfile
+    ssh/config
 )
 
 for file in ${folowing[*]};do
