@@ -1,0 +1,12 @@
+################
+swap caps-ctrl
+
+edit /usr/share/X11/xkb/symbols/pc
+>>>>>>>>>>>>>>>>>>>>>
+    key <CAPS> {	[ Caps_Lock		]	};
+    key <LCTL> {	[ Control_L		]	};
+=====================
+    key <CAPS> {	[ Control_L     ]	};
+    key <LCTL> {	[ Caps_Lock		]	};
+<<<<<<<<<<<<<<<<<<<<<
+
