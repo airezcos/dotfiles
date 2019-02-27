@@ -51,7 +51,7 @@ call SetupVAM()
 " ACTIVATING PLUGINS
 
 " OPTION 1, use VAMActivate
-VAMActivate powerline The_NERD_tree 
+VAMActivate powerline The_NERD_tree vim-polyglot
 
 " OPTION 2: use call vam#ActivateAddons
 "call vam#ActivateAddons([PLUGIN_NAME], {})
