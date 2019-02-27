@@ -5,5 +5,11 @@ Host github.com
   User git
   Port 22
 
+Host hassio
+  User root
+
+Host hass
+  User hassio
+
 Host *
   Port 22
