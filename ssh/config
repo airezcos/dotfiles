@@ -1,5 +1,5 @@
-Host gitlab
-  Port 1122
+Host gitlab.airez.duckdns.org
+  Port 32222
 
 Host github.com
   User git
