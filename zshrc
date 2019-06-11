@@ -97,5 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+path+=${HOME}/.local/bin
+export PATH
 # if [ /snap/bin/kubectl ]; then source <(kubectl completion zsh); fi
 if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
