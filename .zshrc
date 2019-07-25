@@ -1,15 +1,20 @@
+# vim: ft=zshrc
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/ronny/.oh-my-zsh"
+  export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # this was ## ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+# 
+# testing new theme
+# ZSH_THEME="agnoster"
+ZSH_THEME="asciigit"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -98,17 +103,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias cfz="vim ~/.zshrc"
 
 # path+=${HOME}/.local/bin
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export EDITOR="vim"
-export TERMINAL="urxvt"
-export BROWSER="chromium"
-export READER="zathura"
-export FILE="ranger"
+# export TERMINAL="urxvt"
+# export BROWSER="chromium"
+# export READER="zathura"
+# export FILE="ranger"
 # export BIB="$HOME/Documents/LaTeX/uni.bib"
 # export REFER="$HOME/Documents/referbib"
-export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+# export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 # export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 # export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 
@@ -121,10 +127,3 @@ export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"; a="${a%_}"
 export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
-
-# if [ /snap/bin/kubectl ]; then source <(kubectl completion zsh); fi
-if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
-
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi
