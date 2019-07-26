@@ -14,7 +14,8 @@
 # 
 # testing new theme
 # ZSH_THEME="agnoster"
-ZSH_THEME="asciigit"
+# ZSH_THEME="asciigit/asciigit"
+ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -127,3 +128,6 @@ export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"; a="${a%_}"
 export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
+
+source ~/p10k-lean.zsh
+bindkey -v
