@@ -198,5 +198,5 @@ bar {
 }
 
 # screensaver
-bindsym $mod+Shift+Delete exec "~/i3lock-blur/lock.sh"
-exec xautolock -time 15 -locker '~/i3lock-blur/lock.sh' &
+bindsym $mod+Shift+Delete exec "~/.local/bin/i3cmds/blur-lock"
+exec xautolock -time 15 -locker '~/.local/bin/i3cmds/blur-lock' &
