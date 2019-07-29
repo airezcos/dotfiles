@@ -26,8 +26,9 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-gaps inner 15
-gaps outer 15
+gaps inner 10
+gaps outer 7
+default_border pixel
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
