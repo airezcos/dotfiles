@@ -53,10 +53,10 @@ fi
 ## ZLE tweaks ##
 
 ## use the vi navigation keys (hjkl) besides cursor keys in menu completion
-#bindkey -M menuselect 'h' vi-backward-char        # left
-#bindkey -M menuselect 'k' vi-up-line-or-history   # up
-#bindkey -M menuselect 'l' vi-forward-char         # right
-#bindkey -M menuselect 'j' vi-down-line-or-history # bottom
+bindkey -M menuselect 'h' vi-backward-char        # left
+bindkey -M menuselect 'k' vi-up-line-or-history   # up
+bindkey -M menuselect 'l' vi-forward-char         # right
+bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
 ## set command prediction from history, see 'man 1 zshcontrib'
 #is4 && zrcautoload predict-on && \
@@ -66,14 +66,14 @@ fi
 #bindkey "^Z" predict-off
 
 ## press ctrl-q to quote line:
-#mquote () {
-#      zle beginning-of-line
-#      zle forward-word
-#      # RBUFFER="'$RBUFFER'"
-#      RBUFFER=${(q)RBUFFER}
-#      zle end-of-line
-#}
-#zle -N mquote && bindkey '^q' mquote
+mquote () {
+      zle beginning-of-line
+      zle forward-word
+      # RBUFFER="'$RBUFFER'"
+      RBUFFER=${(q)RBUFFER}
+      zle end-of-line
+}
+zle -N mquote && bindkey '^q' mquote
 
 ## define word separators (for stuff like backward-word, forward-word, backward-kill-word,..)
 #WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # the default
@@ -82,20 +82,20 @@ fi
 #WORDCHARS='${WORDCHARS:s@/@}'
 
 # just type '...' to get '../..'
-#rationalise-dot() {
-#local MATCH
-#if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
-#  LBUFFER+=/
-#  zle self-insert
-#  zle self-insert
-#else
-#  zle self-insert
-#fi
-#}
-#zle -N rationalise-dot
-#bindkey . rationalise-dot
+rationalise-dot() {
+local MATCH
+if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
+  LBUFFER+=/
+  zle self-insert
+  zle self-insert
+else
+  zle self-insert
+fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
 ## without this, typing a . aborts incremental history search
-#bindkey -M isearch . self-insert
+bindkey -M isearch . self-insert
 
 #bindkey '\eq' push-line-or-edit
 
@@ -334,6 +334,8 @@ fi
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
+bindkey -v
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
