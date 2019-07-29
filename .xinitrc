@@ -49,6 +49,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 ~/.fehbg &
-~/i3lock-blur/lock.sh &
+~/.local/bin/i3cmds/blur-lock &
 pgrep sxhkd || sxhkd &
 exec i3
