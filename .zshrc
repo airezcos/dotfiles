@@ -66,14 +66,14 @@ bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 #bindkey "^Z" predict-off
 
 ## press ctrl-q to quote line:
-#mquote () {
-#      zle beginning-of-line
-#      zle forward-word
-#      # RBUFFER="'$RBUFFER'"
-#      RBUFFER=${(q)RBUFFER}
-#      zle end-of-line
-#}
-#zle -N mquote && bindkey '^q' mquote
+mquote () {
+      zle beginning-of-line
+      zle forward-word
+      # RBUFFER="'$RBUFFER'"
+      RBUFFER=${(q)RBUFFER}
+      zle end-of-line
+}
+zle -N mquote && bindkey '^q' mquote
 
 ## define word separators (for stuff like backward-word, forward-word, backward-kill-word,..)
 #WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # the default
@@ -337,8 +337,33 @@ bindkey -M isearch . self-insert
 bindkey -v
 
 /usr/bin/screenfetch
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
 
-export TERMINAL=urxvt
+export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export EDITOR="vim"
+export TERMINAL="urxvt"
+export BROWSER="chromium"
+export READER="zathura"
+export FILE="ranger"
+# export BIB="$HOME/Documents/LaTeX/uni.bib"
+# export REFER="$HOME/Documents/referbib"
+export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+# export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
+# export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"; a="${a%_}"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"; a="${a%_}"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
+
+if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  exec startx
+fi
