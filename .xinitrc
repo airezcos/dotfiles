@@ -51,5 +51,5 @@ fi
 setxkbmap no
 ~/.fehbg &
 ~/.local/bin/i3cmds/blur-lock &
-pgrep sxhkd || sxhkd &> sxhkd.log &
+pgrep sxhkd || sxhkd
 exec i3
