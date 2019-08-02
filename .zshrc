@@ -336,8 +336,6 @@ bindkey -M isearch . self-insert
 ## END OF FILE #################################################################
 bindkey -v
 
-/usr/bin/screenfetch
-
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
@@ -367,3 +365,5 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+
+/usr/bin/screenfetch
