@@ -336,7 +336,8 @@ bindkey -M isearch . self-insert
 ## END OF FILE #################################################################
 bindkey -v
 
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias dss="d status -sb"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
 
