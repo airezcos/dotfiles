@@ -51,7 +51,7 @@ call SetupVAM()
 " ACTIVATING PLUGINS
 
 " OPTION 1, use VAMActivate
-VAMActivate powerline The_NERD_tree vim-polyglot
+VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes
 
 " OPTION 2: use call vam#ActivateAddons
 "call vam#ActivateAddons([PLUGIN_NAME], {})
@@ -60,3 +60,5 @@ VAMActivate powerline The_NERD_tree vim-polyglot
 " OPTION 3: Create a file ~/.vim-scripts putting a PLUGIN_NAME into each line (# for comments)
 " See lazy loading plugins section in README.md for details
 "call vam#Scripts('~/.vim-scripts', {'tag_regex': '.*'})
+
+let g:airline_powerline_fonts = 1
