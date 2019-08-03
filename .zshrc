@@ -97,7 +97,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias dss="d status -sb"
+alias cfz="vim ~/.zshrc"
+alias cfi="vim ~/.config/i3/config"
+
+bindkey -v
 
 # path+=${HOME}/.local/bin
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
@@ -128,3 +133,5 @@ if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/s
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+
+/usr/bin/screenfetch
