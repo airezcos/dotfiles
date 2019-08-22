@@ -368,3 +368,8 @@ if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/s
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+
+# powerlevel10k
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

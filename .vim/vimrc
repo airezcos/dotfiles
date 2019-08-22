@@ -25,6 +25,7 @@ set hidden		          " Hide buffers when they are abandoned
 set mouse=a		          " Enable mouse usage (all modes)
 set path=${PWD}/**
 set wildmenu
+set splitbelow splitright
 
 fun! SetupVAM()
   let c = get(g:, 'vim_addon_manager', {})
@@ -51,7 +52,7 @@ call SetupVAM()
 " ACTIVATING PLUGINS
 
 " OPTION 1, use VAMActivate
-VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes
+VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes i3config vimagit
 
 " OPTION 2: use call vam#ActivateAddons
 "call vam#ActivateAddons([PLUGIN_NAME], {})
