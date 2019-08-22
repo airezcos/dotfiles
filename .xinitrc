@@ -48,7 +48,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-setxkbmap no
+setxkbmap -option caps:super no && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
+xset r rate 300 50
 ~/.fehbg &
 ~/.local/bin/i3cmds/blur-lock &
 pgrep sxhkd || sxhkd &
