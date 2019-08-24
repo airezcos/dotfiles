@@ -52,7 +52,7 @@ call SetupVAM()
 " ACTIVATING PLUGINS
 
 " OPTION 1, use VAMActivate
-VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes i3config vimagit
+VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes github:christoomey/vim-tmux-navigator i3config vimagit
 
 " OPTION 2: use call vam#ActivateAddons
 "call vam#ActivateAddons([PLUGIN_NAME], {})
