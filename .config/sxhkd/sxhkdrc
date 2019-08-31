@@ -8,7 +8,7 @@ super + r
 # super + e
 # 	$TERMINAL -e neomutt
 # super + m
-# 	$TERMINAL -e ncmpcpp
+#  	$TERMINAL -e ncmpcpp
 # super + n
 # 	$TERMINAL -e newsboat
 super + i
@@ -24,7 +24,7 @@ super + y
 # super + w
 # 	webby | xargs -r $BROWSER
 super + shift + w
-	$BROWSER
+	$BROWSER -P skole
 # super + shift + g
 # 	gimp
 
