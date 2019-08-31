@@ -369,6 +369,8 @@ if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
 
+ssh-agent /bin/zsh
+
 # remove <C-s> freezing
 stty -ixon
 
