@@ -51,7 +51,7 @@ for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] scratchpad show
-for_window [instance="dropdown_tmuxdd"] resize set 900 500
+for_window [instance="dropdown_tmuxdd"] resize set 900 600
 for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
@@ -225,6 +225,6 @@ bar {
 }
 
 # screensaver
-bindsym $mod+Shift+Delete exec "~/.local/bin/i3cmds/blur-lock"
+bindsym $mod+Shift+Delete exec "~/.local/bin/i3cmds/blur-lock && systemctl suspend"
 exec xautolock -time 15 -locker '~/.local/bin/i3cmds/blur-lock' &
 exec --no-startup-id compton -f
