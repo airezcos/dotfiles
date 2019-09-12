@@ -56,8 +56,9 @@
 *color15:               S_base3
 
 URxvt.intensityStyles:  false
+URxvt.geometry:         170x81
 
-URxvt*background:       [95]S_base03
+URxvt*background:       [92]S_base03
 URxvt*scrollBar:        false
 URxvt*buffered:         true
 URxvt*cursorBlink:      true
