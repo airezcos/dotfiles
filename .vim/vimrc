@@ -1,3 +1,5 @@
+let mapleader = ","
+
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 "set t_Co=256              " enable 256-color mode.
@@ -5,7 +7,7 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 colorscheme solarized     " set colorscheme
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
-set nohlsearch            " Don't continue to highlight searched phrases.
+"set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
 set ruler                 " Always show info along bottom.
@@ -15,7 +17,7 @@ set softtabstop=4         " unify
 set shiftwidth=4          " indent/outdent by 4 columns
 set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
-"set background=dark
+set background=dark
 set showcmd		          " Show (partial) command in status line.
 "set showmatch		      " Show matching brackets.
 set ignorecase		      " Do case insensitive matching
@@ -23,43 +25,147 @@ set smartcase		      " Do smart case matching
 set autowrite		      " Automatically save before commands like :next and :make
 set hidden		          " Hide buffers when they are abandoned
 set mouse=a		          " Enable mouse usage (all modes)
-set path=${PWD}/**
+"set path=${PWD}/**
 set wildmenu
 set splitbelow splitright
+set backspace=indent,eol,start
+set linebreak
+set scrolloff=5
 
-fun! SetupVAM()
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
+highlight Normal guibg=NONE ctermbg=NONE
 
-  " Force your ~/.vim/after directory to be last in &rtp always:
-  " let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
 
-  " most used options you may want to use:
-  " let c.log_to_buf = 1
-  " let c.auto_install = 0
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-        \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-  endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autoiastall VimPlug if not installed already
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-  " This provides the VAMActivate command, you could be passing plugin names, too
-  call vam#ActivateAddons([], {})
-endfun
-call SetupVAM()
+call plug#begin('~/.vim/plugged')
 
-" ACTIVATING PLUGINS
+" A tree explorer plugin for vim.
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" OPTION 1, use VAMActivate
-VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes github:christoomey/vim-tmux-navigator i3config vimagit
+" A solid language pack for Vim.
+Plug 'sheerun/vim-polyglot'
 
-" OPTION 2: use call vam#ActivateAddons
-"call vam#ActivateAddons([PLUGIN_NAME], {})
-" use <c-x><c-p> to complete plugin names
+" Lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
-" OPTION 3: Create a file ~/.vim-scripts putting a PLUGIN_NAME into each line (# for comments)
-" See lazy loading plugins section in README.md for details
-"call vam#Scripts('~/.vim-scripts', {'tag_regex': '.*'})
+" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startif...
+Plug 'ryanoasis/vim-devicons'
+
+" Seamless navigation between tmux panes and vim splits
+Plug 'christoomey/vim-tmux-navigator'
+
+" surround.vim: quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
+
+" Vim syntax highlighting for i3 config
+Plug 'mboughaba/i3config.vim'
+
+" Ease your git workflow within Vim
+Plug 'jreybert/vimagit'
+
+" Vim syntax highlighting for the OpenSCAD language
+Plug 'sirtaj/vim-openscad'
+
+" fzf :heart: vim
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'junegunn/goyo.vim'
+
+Plug 'kovetskiy/sxhkd-vim'
+
+" fugitive.vim: A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-fugitive'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf mappings
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 let g:airline_powerline_fonts = 1
+
+autocmd BufReadPost *
+            \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+            \ |   exe "normal! g`\""
+            \ | endif
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file (restore to previous version)
+  if has('persistent_undo')
+    set undofile	" keep an undo file (undo changes after closing)
+  endif
+endif
+
+" Replace all is aliased to S.
+nnoremap S :%s//g<Left><Left>
+
+" Update binds when sxhkdrc is updated.
+autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+" Run xrdb whenever Xdefaults or Xresources are updated.
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
+" Compile document, be it groff/LaTeX/markdown/etc.
+map <leader>c :w! \| !compiler <c-r>%<CR>
+
+" Open corresponding .pdf/.html or preview
+map <leader>p :!opout <c-r>%<CR><CR>
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" fun! SetupVAM()
+"   let c = get(g:, 'vim_addon_manager', {})
+"   let g:vim_addon_manager = c
+"   let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
+"
+"   " Force your ~/.vim/after directory to be last in &rtp always:
+"   " let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
+"
+"   " most used options you may want to use:
+"   " let c.log_to_buf = 1
+"   " let c.auto_install = 0
+"   let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
+"   if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
+"     execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
+"         \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
+"   endif
+"
+"   " This provides the VAMActivate command, you could be passing plugin names, too
+"   call vam#ActivateAddons([], {})
+" endfun
+" call SetupVAM()
+"
+" " ACTIVATING PLUGINS
+"
+" " OPTION 1, use VAMActivate
+" VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes github:christoomey/vim-tmux-navigator surround i3config vimagit openscad
+"
+" " OPTION 2: use call vam#ActivateAddons
+" "call vam#ActivateAddons([PLUGIN_NAME], {})
+" " use <c-x><c-p> to complete plugin names
+"
+" " OPTION 3: Create a file ~/.vim-scripts putting a PLUGIN_NAME into each line (# for comments)
+" " See lazy loading plugins section in README.md for details
+" "call vam#Scripts('~/.vim-scripts', {'tag_regex': '.*'})
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
