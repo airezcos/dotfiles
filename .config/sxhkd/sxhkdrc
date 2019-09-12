@@ -27,6 +27,8 @@ super + shift + w
 	$BROWSER -P skole
 # super + shift + g
 # 	gimp
+super + p
+    ~/Applications/PrusaSlicer.AppImage
 
 # Et cetera...
 super + grave
