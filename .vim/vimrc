@@ -142,6 +142,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 let g:tex_flavor = "latex"
+let g:LatexBox_viewer=$READER
 
 "" Navigating with guides
 "	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
