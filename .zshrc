@@ -340,6 +340,9 @@ alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias dss="d status -sb"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
+alias cfhc="vim scp://root@hassio//config/configuration.yaml"
+alias cfhs="vim scp://root@hassio//config/scene.yaml"
+alias cfha="vim scp://root@hassio//config/automations.yaml"
 
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export EDITOR="vim"
@@ -363,7 +366,8 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
-if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
+# if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
+if [ -d ~/buntu ] && [ -z "$(ls -A -- ~/buntu)" ]; then sshfs buntu:share ~/buntu; fi
 
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
