@@ -343,7 +343,7 @@ alias dss="d status -sb"
 alias cfz="vim ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
 alias cfhc="vim scp://root@hassio//config/configuration.yaml"
-alias cfhs="vim scp://root@hassio//config/scene.yaml"
+alias cfhs="vim scp://root@hassio//config/scenes.yaml"
 alias cfha="vim scp://root@hassio//config/automations.yaml"
 
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
