@@ -1,6 +1,6 @@
 #define background_opacity  92
-!#include ".Xresources.d/solarized.dark"
-#include ".Xresources.d/solarized.light"
+#include ".Xresources.d/solarized.dark"
+!#include ".Xresources.d/solarized.light"
 
 URxvt.intensityStyles:      false
 URxvt.geometry:             170x81
@@ -16,7 +16,9 @@ URxvt*borderless:           1
 URxvt*loginShell:           true
 Urxvt*secondaryScroll:      true    # Enable Shift-PageUp/Down in screen
 URxvt*saveLines:            10000
-URxvt.perl-ext-common:      default,matcher
-URxvt.urlLauncher:          firefox
+URxvt.perl-ext-common:      default,matcher,resize-font
+URxvt.keysym.C-Down:        resize-font:smaller
+URxvt.keysym.C-Up:          resize-font:bigger
+URxvt.urlLauncher:          chromium
 URxvt.iso14755:             false
 URxvt.iso14755_52:          false
