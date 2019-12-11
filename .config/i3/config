@@ -57,7 +57,7 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
-floating_maximum_size 1920 x -1
+floating_maximum_size 1920 x 1023
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
