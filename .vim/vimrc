@@ -95,6 +95,8 @@ Plug 'brennier/quicktex'
 " incremental search improved - successor of incsearch.vim
 Plug 'haya14busa/is.vim'
 
+Plug 'vim/killersheep'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
