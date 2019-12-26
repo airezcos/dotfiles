@@ -388,5 +388,5 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 export FZF_DEFAULT_COMMAND='fd --type f -Hc never'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 if type keychain > /dev/null; then
-  eval `keychain --eval --agents ssh id_rsa`
+  eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
