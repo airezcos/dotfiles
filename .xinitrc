@@ -51,7 +51,8 @@ fi
 setxkbmap -option caps:super no && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
 xset r rate 300 50
 ~/.fehbg &
-~/.local/bin/i3cmds/blur-lock &
+# ~/.local/bin/i3cmds/blur-lock &
 pgrep sxhkd || sxhkd &
 unclutter &
-exec i3
+# exec i3
+exec /bin/bspwm

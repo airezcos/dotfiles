@@ -340,12 +340,14 @@ alias gss="git status -sb"
 alias gcam="git commit -am"
 alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias dss="d status -sb"
-alias cfz="vim ~/.zshrc"
+alias cfz="vim ~/.zshrc && source ~/.zshrc"
 alias cfi="vim ~/.config/i3/config"
+alias cfk="vim ~/.config/sxhkd/sxhkdrc"
 alias cfhc="vim scp://root@hassio//config/configuration.yaml"
 alias cfhs="vim scp://root@hassio//config/scenes.yaml"
 alias cfha="vim scp://root@hassio//config/automations.yaml"
 
+export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$PATH:/usr/share/texmf-dist/scripts/texlive/"
 export EDITOR="vim"
@@ -372,9 +374,9 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 # if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
 if [ -d ~/buntu ] && [ -z "$(ls -A -- ~/buntu)" ]; then sshfs buntu:share ~/buntu; fi
 
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi
+# if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#   exec startx
+# fi
 
 # remove <C-s> freezing
 stty -ixon
