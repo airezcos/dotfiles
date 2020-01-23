@@ -1,6 +1,7 @@
 #! /bin/sh
 
 sxhkd &
+~/.local/bin/polybar_start
 
 if [[  ${HOST} == 'arch-desktop' ]]; then
     bspc monitor DP-0 -d I II III IV V
