@@ -1,4 +1,4 @@
-#define background_opacity  92
+!#define background_opacity  92
 #include ".Xresources.d/solarized.dark"
 !#include ".Xresources.d/solarized.light"
 
@@ -22,3 +22,13 @@ URxvt.keysym.C-Up:          resize-font:bigger
 URxvt.urlLauncher:          chromium
 URxvt.iso14755:             false
 URxvt.iso14755_52:          false
+
+!XTerm*scrollBar:            false
+!XTerm*buffered:             true
+XTerm*cursorBlink:          true
+XTerm*underlineColor:       yellow
+XTerm*font:                 xft:UbuntuMono\ Nerd\ Font:size=11:antialias=true
+!XTerm*depth:                32
+!XTerm*borderless:           1
+XTerm*loginShell:           true
+XTerm*saveLines:            10000
