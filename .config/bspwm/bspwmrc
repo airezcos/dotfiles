@@ -1,6 +1,7 @@
 #! /bin/sh
 
 sxhkd &
+polybar example &
 
 if [[  ${HOST} == 'arch-desktop' ]]; then
     bspc monitor DP-0 -d I II III IV V
@@ -19,6 +20,6 @@ bspc config gapless_monocle      true
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^1'
 bspc rule -a urxvt desktop='^2'
-bspc rule -a mplayer2 state=floating
+bspc rule -a mpv state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
