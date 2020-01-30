@@ -1,2 +1,8 @@
-export EDITOR=vim
-export VISUAL=vim
+export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export PATH="$PATH:/usr/share/texmf-dist/scripts/texlive/"
+export EDITOR="vim"
+export VISUAL="gvim"
+export TERMINAL="urxvt"
+export BROWSER="chromium"
+export READER="zathura"
+export FILE="ranger"
