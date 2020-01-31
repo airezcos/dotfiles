@@ -3,11 +3,13 @@
 sxhkd &
 ~/.local/bin/polybar_start
 
-if [[  ${HOST} == 'arch-desktop' ]]; then
-    bspc monitor DP-0 -d I II III IV V
-    bspc monitor HDMI-0 -d VI VII VIII IX X
+if [[  ${HOSTNAME} == 'arch-desktop' ]]; then
+    bspc monitor DP-0 -d 1 2 3 4 5
+    bspc monitor HDMI-0 -d 6 7 8 9 10
+    echo 'run' >> bspwm.log
 else
-    bspc monitor -d I II III IV V VI VII VIII IX X
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+    echo 'dont run' >> bspwm.log
 fi
 
 bspc config border_width         2
