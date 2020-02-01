@@ -385,3 +385,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 if type keychain > /dev/null; then
   eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
+eval "`pip completion --zsh`"
