@@ -334,6 +334,8 @@ bindkey -M isearch . self-insert
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
+autoload -U compinit
+
 bindkey -v
 
 alias gss="git status -sb"
@@ -367,11 +369,11 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 # if [ -d ~/server ] && [ -z "$(ls -A -- ~/server)" ]; then sshfs jasper:share ~/server; fi
 if [ -d ~/buntu ] && [ -z "$(ls -A -- ~/buntu)" ]; then sshfs buntu:share ~/buntu; fi
 
-if [[ $HOST == 'arch-desktop' ]]; then
-  if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-    exec startx
-  fi
-fi
+#if [[ $HOST == 'arch-desktop' ]]; then
+#  if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#    exec startx
+#  fi
+#fi
 
 # remove <C-s> freezing
 stty -ixon
@@ -387,3 +389,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 if type keychain > /dev/null; then
   eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
+eval "`pip completion --zsh`"
