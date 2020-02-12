@@ -3,7 +3,7 @@
 !#include ".Xresources.d/solarized.light"
 
 URxvt.intensityStyles:      false
-URxvt.geometry:             170x81
+URxvt.geometry:             170x55
 
 !URxvt*background:          [92]S_base03
 URxvt*scrollBar:            false
@@ -17,11 +17,13 @@ URxvt*loginShell:           true
 Urxvt*secondaryScroll:      true    # Enable Shift-PageUp/Down in screen
 URxvt*saveLines:            10000
 URxvt.perl-ext-common:      default,matcher,resize-font
-URxvt.keysym.C-Down:        resize-font:smaller
-URxvt.keysym.C-Up:          resize-font:bigger
+!URxvt.keysym.C-Down:        resize-font:smaller
+!URxvt.keysym.C-Up:          resize-font:bigger
 URxvt.urlLauncher:          chromium
 URxvt.iso14755:             false
 URxvt.iso14755_52:          false
+
+URxvtFuzzy*internalBorder:  30
 
 !XTerm*scrollBar:            false
 !XTerm*buffered:             true
