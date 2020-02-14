@@ -25,3 +25,7 @@ bspc rule -a urxvt desktop='^2'
 bspc rule -a mpv state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+bspc rule -a \*:"URxvtFuzzy" state=floating center=on sticky=on
+bspc rule -a \*:"NeoMutt" state=floating center=on sticky=on
+bspc rule -a \*:"filemanager" state=floating center=on sticky=on

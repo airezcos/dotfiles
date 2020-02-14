@@ -146,88 +146,9 @@ map <leader>p :!opout <c-r>%<CR><CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" Brake up multiline insert so that undo removes one line
+inoremap <CR> <CR>
+
 let g:tex_flavor = "latex"
 let g:LatexBox_viewer=$READER
 let g:LatexBox_latexmk_preview_continuously=1
-
-"" Navigating with guides
-"	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
-"	vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
-"	map <leader><leader> <Esc>/<++><Enter>"_c4l
-"
-""""LATEX
-"	" Word count:
-"	autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
-"	" Code snippets
-"	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-"	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
-"	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
-"	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
-"	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-"	autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
-"	autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
-"	autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
-"	autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
-"	autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
-"	autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
-"	autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-"	autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-"	autocmd FileType tex inoremap ,li <Enter>\item<Space>
-"	autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
-"	autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
-"	autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
-"	autocmd FileType tex inoremap ,can \cand{}<Tab><++><Esc>T{i
-"	autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
-"	autocmd FileType tex inoremap ,v \vio{}<Tab><++><Esc>T{i
-"	autocmd FileType tex inoremap ,a \href{}{<++>}<Space><++><Esc>2T{i
-"	autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
-"	autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
-"	autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
-"	autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-"	autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-"	autocmd FileType tex inoremap ,st <Esc>F{i*<Esc>f}i
-"	autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
-"	autocmd FileType tex inoremap ,up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
-"	autocmd FileType tex nnoremap ,up /usepackage<Enter>o\usepackage{}<Esc>i
-"	autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
-"	autocmd FileType tex inoremap ,bt {\blindtext}
-"	autocmd FileType tex inoremap ,nu $\varnothing$
-"	autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
-"	autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" fun! SetupVAM()
-"   let c = get(g:, 'vim_addon_manager', {})
-"   let g:vim_addon_manager = c
-"   let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
-"
-"   " Force your ~/.vim/after directory to be last in &rtp always:
-"   " let g:vim_addon_manager.rtp_list_hook = 'vam#ForceUsersAfterDirectoriesToBeLast'
-"
-"   " most used options you may want to use:
-"   " let c.log_to_buf = 1
-"   " let c.auto_install = 0
-"   let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-"   if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-"     execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-"         \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-"   endif
-"
-"   " This provides the VAMActivate command, you could be passing plugin names, too
-"   call vam#ActivateAddons([], {})
-" endfun
-" call SetupVAM()
-"
-" " ACTIVATING PLUGINS
-"
-" " OPTION 1, use VAMActivate
-" VAMActivate The_NERD_tree vim-polyglot vim-airline github:vim-airline/vim-airline-themes github:christoomey/vim-tmux-navigator surround i3config vimagit openscad
-"
-" " OPTION 2: use call vam#ActivateAddons
-" "call vam#ActivateAddons([PLUGIN_NAME], {})
-" " use <c-x><c-p> to complete plugin names
-"
-" " OPTION 3: Create a file ~/.vim-scripts putting a PLUGIN_NAME into each line (# for comments)
-" " See lazy loading plugins section in README.md for details
-" "call vam#Scripts('~/.vim-scripts', {'tag_regex': '.*'})
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
