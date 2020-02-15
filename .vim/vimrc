@@ -61,7 +61,7 @@ Plug 'ryanoasis/vim-devicons'
 " Seamless navigation between tmux panes and vim splits
 Plug 'christoomey/vim-tmux-navigator'
 
-" surround.vim: quoting/parenthesizing made simple
+" Surround.vim: quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
 " Vim syntax highlighting for i3 config
@@ -73,7 +73,7 @@ Plug 'jreybert/vimagit'
 " Vim syntax highlighting for the OpenSCAD language
 Plug 'sirtaj/vim-openscad'
 
-" fzf :heart: vim
+" Fzf :heart: vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -83,7 +83,7 @@ Plug 'junegunn/goyo.vim'
 " Vim plugin for sxhkd (Simple X hotkey daemon)
 Plug 'kovetskiy/sxhkd-vim'
 
-" fugitive.vim: A Git wrapper so awesome, it should be illegal
+" Fugitive.vim: A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
 
 " The fancy start screen for Vim.
@@ -92,8 +92,14 @@ Plug 'mhinz/vim-startify'
 " A vim plugin for writing Latex quickly.
 Plug 'brennier/quicktex'
 
-" incremental search improved - successor of incsearch.vim
+" Incremental search improved - successor of incsearch.vim
 Plug 'haya14busa/is.vim'
+
+" Enable repeating supported plugin maps with "."
+Plug 'tpope/vim-repeat'
+
+" Range, pattern and substitute preview for Vim
+Plug 'markonm/traces.vim'
 
 Plug 'vim/killersheep'
 
