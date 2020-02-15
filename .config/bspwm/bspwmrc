@@ -1,6 +1,5 @@
 #! /bin/sh
 
-sxhkd &
 ~/.local/bin/polybar_start
 
 if [[  ${HOSTNAME} == 'arch-desktop' ]]; then
