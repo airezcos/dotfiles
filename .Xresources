@@ -1,4 +1,4 @@
-!#define background_opacity  92
+#define background_opacity  92
 #include ".Xresources.d/solarized.dark"
 !#include ".Xresources.d/solarized.light"
 
