@@ -60,6 +60,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " Seamless navigation between tmux panes and vim splits
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'melonmanchan/vim-tmux-resizer'
 
 " Surround.vim: quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
