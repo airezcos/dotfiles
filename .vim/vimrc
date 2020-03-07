@@ -101,6 +101,12 @@ Plug 'tpope/vim-repeat'
 " Range, pattern and substitute preview for Vim
 Plug 'markonm/traces.vim'
 
+" Flake8 plugin for Vim
+Plug 'nvie/vim-flake8'
+
+" Resize tmux panes and vim splits with same shortcuts
+Plug 'melonmanchan/vim-tmux-resizer'
+
 Plug 'vim/killersheep'
 
 call plug#end()
@@ -153,7 +159,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Brake up multiline insert so that undo removes one line
-inoremap <CR> <CR>
+" inoremap <CR> <CR>
 
 let g:tex_flavor = "latex"
 let g:LatexBox_viewer=$READER
