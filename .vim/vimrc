@@ -1,6 +1,6 @@
 let mapleader = ","
 
-set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
+"set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 "set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
@@ -11,11 +11,11 @@ set laststatus=2          " last window always has a statusline
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
 set ruler                 " Always show info along bottom.
-set autoindent            " auto-indent
-set tabstop=4             " tab spacing
-set softtabstop=4         " unify
-set shiftwidth=4          " indent/outdent by 4 columns
-set shiftround            " always indent/outdent to the nearest tabstop
+"set autoindent            " auto-indent
+"set tabstop=4             " tab spacing
+"set softtabstop=4         " unify
+"set shiftwidth=4          " indent/outdent by 4 columns
+"set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set background=dark
 set showcmd		          " Show (partial) command in status line.
