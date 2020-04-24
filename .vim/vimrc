@@ -110,6 +110,10 @@ Plug 'melonmanchan/vim-tmux-resizer'
 
 Plug 'vim/killersheep'
 
+" Themes
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'joshdick/onedark.vim'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
