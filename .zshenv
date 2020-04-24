@@ -1,5 +1,6 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$PATH:/usr/share/texmf-dist/scripts/texlive/"
+export PATH="$PATH:$HOME/.emacs.d/bin/"
 export EDITOR="vim"
 export VISUAL="vim"
 export TERMINAL="urxvtc"
