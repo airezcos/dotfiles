@@ -100,15 +100,19 @@ Plug 'vim/killersheep'
 
 "Themes
 Plug 'lifepillar/vim-solarized8'
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai'
+Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
-colorscheme gruvbox
-" colorscheme molokai
+" colorscheme gruvbox
+" colorscheme jellybeans
+colorscheme molokai
+highlight MatchParen guifg=bg guibg=fg gui=bold
+highlight Normal guibg=NONE ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf mappings
@@ -126,6 +130,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " let g:airline_powerline_fonts = 1
 
 let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -175,7 +180,7 @@ map <leader>c :w! \| !compiler <c-r>%<CR>
 " Open corresponding .pdf/.html or preview
 map <leader>p :!opout <c-r>%<CR><CR>
 
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Brake up multiline insert so that undo removes one line
