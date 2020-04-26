@@ -1,5 +1,6 @@
 !#define background_opacity 92
-#include ".Xresources.d/solarized.dark"
+#include ".Xresources.d/iterm-Molokai.Xresources"
+!#include ".Xresources.d/solarized.dark"
 !#include ".Xresources.d/solarized.light"
 
 URxvt.intensityStyles:      false
