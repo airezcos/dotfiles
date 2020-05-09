@@ -89,6 +89,36 @@
 
 # Font configuration
 font:
+
+  # Nice #########################
+  #
+  # normal:
+  #   family: RobotoMono Nerd Font
+  #   style: Regular
+  # size: 6.5
+  #
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+  size: 9.5
+  #
+  # normal:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # size: 10.0
+  ################################
+
+#   bold:
+#     family: monospace
+#     style: Bold
+
+#   italic:
+#     family: monospace
+#     style: Italic
+
+#   bold_italic:
+#     family: monospace
+#     style: Bold Italic
   # Normal (roman) font face
   #normal:
     # Font family
@@ -136,7 +166,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 7.0
+  # size: 6.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
