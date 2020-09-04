@@ -328,12 +328,14 @@ map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
 
 nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :update<cr>:source %<cr>
 
 nnoremap <Up> :resize +2<CR>
 nnoremap <Down> :resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>
 nnoremap <Left> :vertical resize -2<CR>
+
+nnoremap <silent><C-F> :Files<cr>
 
 " Brake up multiline insert so that undo removes one line
 " inoremap <CR> <CR>
