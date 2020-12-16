@@ -1,14 +1,19 @@
 #! /bin/sh
 
-~/.local/bin/polybar_start
-
 if [[  ${HOSTNAME} == 'arch-desktop' ]]; then
     bspc monitor DP-0 -d 1 2 3 4 5
     bspc monitor HDMI-0 -d 6 7 8 9 10
-    echo 'run' >> bspwm.log
 else
-    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-    echo 'dont run' >> bspwm.log
+    # ~/.local/bin/dockToggle
+    # ~/.screenlayout/docked.sh
+    if [[ $(bspc query --monitors | wc -l) > 1 ]]; then
+        bspc monitor HDMI-3 -d 1 2 3 4 5
+        bspc monitor HDMI-2 -d 6 7 8 9 10
+    elif [[ $(bspc query --monitors | wc -l) == 1 ]]; then
+        bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+    else
+        bspc monitor -d ''
+    fi
 fi
 
 bspc config border_width         2
@@ -17,6 +22,9 @@ bspc config window_gap          12
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
+bspc config single_monocle       true
+
+~/.local/bin/polybar_start
 
 bspc rule -a Chromium desktop='^1'
 bspc rule -a urxvt desktop='^2'

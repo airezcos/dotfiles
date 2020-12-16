@@ -1,6 +1,8 @@
 # Basic binds
 super + {_,shift + }Return
 	$TERMINAL {_,-e tmux}
+super + v
+	$TERMINAL --class neovim -e nvim
 super + d
 	dmenu_run
 super + r
