@@ -27,13 +27,15 @@ bspc config window_gap          12
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-bspc config single_monocle       true
+bspc config single_monocle       fale
 bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
 ~/.local/bin/polybar_start
+volumeicon &
+nm-applet &
 
 bspc rule -a Chromium desktop='^1'
 bspc rule -a urxvt desktop='^2'
@@ -47,3 +49,4 @@ bspc rule -a \*:"NeoMutt" state=floating center=on sticky=on
 bspc rule -a \*:"filemanager" state=floating center=on sticky=on
 bspc rule -a \*:"dman" state=floating center=on
 bspc rule -a Pcmanfm state=floating
+bspc rule -a Spotify:spotify state=floating

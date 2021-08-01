@@ -3,7 +3,7 @@
 [[ ${EUID} -eq 0 ]] || exec sudo $0 $@ 
 
 mountpoint='/mnt/btrfs'
-device='/dev/sda2'
+device='/dev/sda4'
 snapname=`date +%Y-%m-%d_%H:%M`
 
 usage()
@@ -35,6 +35,9 @@ while [[ "$1" != "" ]]; do
     shift
 done
 
+[[ -d $mountpoint ]] || echo mountpoint ${mountpoint} do not exist; exit 1
+[[ -z $(ls -A $mountpoint) ]] || echo mountpoint ${mountpoint} not empty; exit 1
+
 mount -o subvol=/ ${device} ${mountpoint}
-btrfs subvolume snapshot -r / ${mountpoint}/snapshots/${snapname}
+btrfs subvolume snapshot -r / ${mountpoint}/arch-snapshots/${snapname}
 umount ${mountpoint}

@@ -2,13 +2,16 @@
 super + {_,shift + }Return
 	$TERMINAL {_,-e tmux}
 super + v
-	$TERMINAL --class neovim -e nvim
+  neovide
+	# $TERMINAL --class neovim -e nvim
 super + d
 	dmenu_run
 super + r
-	$TERMINAL -name filemanager -e $FILE
+	$TERMINAL --class filemanager -e $FILE
+super + f
+  pcmanfm
 super + e
-	$TERMINAL -name NeoMutt -e neomutt
+	$TERMINAL --class NeoMutt -e neomutt
 # super + m
 #  	$TERMINAL -e ncmpcpp
 super + n
@@ -18,7 +21,7 @@ super + i
 super + y
 	$TERMINAL -e calcurse
 super + u
-	tdrop -ma -w -28 -x 12 -y 47 urxvt -e tmux
+	tdrop -ma -w -28 -x 12 -y 47 $TERMINAL -e tmux
 # super + shift + a
 # 	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
 # super + shift + c
@@ -32,10 +35,16 @@ super + {_,shift + }w
 # super + shift + g
 # 	gimp
 super + p
-	~/Applications/PrusaSlicer.AppImage
+	prusa-slicer
 
 super + space
 	fuzzy_win fuzzy_cmd
+
+ctrl + alt + l
+  lock-color
+
+ctrl + alt + s
+  lock-color && systemctl suspend
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -159,10 +168,11 @@ XF86MonBrightnessUp
 # Recording
 # Take screenshot
 Print
-	maim pic-full-$(date '+%y%m%d-%H%M-%S').png
+	maim ~/Pictures/screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png
 # Pick screenshot type
 shift + Print
-	maimpick
+	maim -s ~/Pictures/screenshots/pic-$(date '+%y%m%d-%H%M-%S').png
+	# maimpick
 
 # Function keys
 # F2 is restart in i3 right now.

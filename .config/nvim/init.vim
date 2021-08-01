@@ -19,9 +19,14 @@ set shiftwidth=4          " indent/outdent by 4 columns
 set smartcase		      " Do smart case matching
 set splitbelow splitright
 set termguicolors
+" set guifont=JetBrainsMono\ Nerd\ Font
+set guifont=SauceCodePro\ Nerd\ Font,MesloLGS\ Nerd\ Font
 
 highlight Normal guibg=NONE ctermbg=NONE
 
+" Neovide stuff
+let g:neovide_cursor_animation_length=0.08
+let g:neovide_cursor_trail_size=0.2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc.nvim setup
@@ -82,7 +87,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -176,8 +181,10 @@ endif
 call plug#begin(stdpath('data') . '/plugged')
 
 " A tree explorer plugin for vim.
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 " , { 'on': 'NERDTreeToggle' }
+
+Plug 'godlygeek/tabular'
 
 " A solid language pack for Vim.
 Plug 'sheerun/vim-polyglot'
@@ -191,19 +198,21 @@ Plug 'ryanoasis/vim-devicons'
 
 " Seamless navigation between tmux panes and vim splits
 Plug 'christoomey/vim-tmux-navigator'
+
+" Resize tmux panes and vim splits with same shortcuts
 Plug 'melonmanchan/vim-tmux-resizer'
 
 " Surround.vim: quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
 " Vim syntax highlighting for i3 config
-Plug 'mboughaba/i3config.vim'
+" Plug 'mboughaba/i3config.vim'
 
 " Ease your git workflow within Vim
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 
 " Vim syntax highlighting for the OpenSCAD language
-Plug 'sirtaj/vim-openscad'
+" Plug 'sirtaj/vim-openscad'
 
 " Fzf :heart: vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -213,7 +222,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 
 " Vim plugin for sxhkd (Simple X hotkey daemon)
-Plug 'kovetskiy/sxhkd-vim'
+" Plug 'kovetskiy/sxhkd-vim'
 
 " Fugitive.vim: A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
@@ -235,14 +244,17 @@ Plug 'tpope/vim-commentary'
 " Flake8 plugin for Vim
 " Plug 'nvie/vim-flake8'
 
-" Resize tmux panes and vim splits with same shortcuts
-Plug 'melonmanchan/vim-tmux-resizer'
-
-Plug 'vim/killersheep'
+" Plug 'vim/killersheep'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'aaronbieber/vim-quicktask'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'aliev/vim-python'
+
+Plug 'voldikss/vim-floaterm'
 
 "Themes
 Plug 'lifepillar/vim-solarized8'
@@ -251,14 +263,21 @@ Plug 'fatih/molokai'
 Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'romainl/apprentice'
+
+" Uml stuff
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'scrooloose/vim-slumlord'
 
 call plug#end()
 
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme jellybeans
-colorscheme molokai
-highlight MatchParen guifg=233 guibg=208 gui=bold
-highlight Normal guibg=NONE ctermbg=NONE
+" colorscheme molokai
+" highlight MatchParen guifg=233 guibg=208 gui=bold
+" highlight Normal guibg=NONE ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf mappings
@@ -272,6 +291,8 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+nnoremap <C-F> :Files<CR>
 
 " let g:airline_powerline_fonts = 1
 
@@ -330,14 +351,49 @@ map <leader>p :!opout <c-r>%<CR><CR>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap <Up> :resize +2<CR>
-nnoremap <Down> :resize -2<CR>
-nnoremap <Right> :vertical resize +2<CR>
-nnoremap <Left> :vertical resize -2<CR>
+" nnoremap <Up> :resize +2<CR>
+" nnoremap <Down> :resize -2<CR>
+" nnoremap <Right> :vertical resize +2<CR>
+" nnoremap <Left> :vertical resize -2<CR>
+
+nnoremap <F10> :FloatermToggle<CR>
+tnoremap <F10> <C-\><C-N>:FloatermToggle<CR>
 
 " Brake up multiline insert so that undo removes one line
 " inoremap <CR> <CR>
 
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:tex_flavor = "latex"
 let g:LatexBox_viewer=$READER
 let g:LatexBox_latexmk_preview_continuously=1
+
+
+if has("python")
+  " let python figure out the path to pydoc
+  python << EOF
+import sys
+import vim
+vim.command("let s:pydoc_path=\'" + sys.prefix + "/lib/pydoc.py\'")
+EOF
+else
+  " manually set the path to pydoc
+  let s:pydoc_path = "/path/to/python/lib/pydoc.py"
+endif
+
+fun! s:setLightlineColorscheme(name)
+    let g:lightline.colorscheme = a:name
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfun
+
+fun! s:lightlineColorschemes(...)
+    return join(map(
+                \ globpath(&rtp,"autoload/lightline/colorscheme/*.vim",1,1),
+                \ "fnamemodify(v:val,':t:r')"),
+                \ "\n")
+endfun
+
+com! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
+            \ call s:setLightlineColorscheme(<q-args>)

@@ -1,3 +1,13 @@
+# remove <C-s> freezing
+stty -ixon
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Filename:      /etc/skel/.zshrc
 # Purpose:       config file for zsh (z shell)
 # Authors:       (c) grml-team (grml.org)
@@ -342,12 +352,16 @@ alias gss="git status -sb"
 alias gcam="git commit -am"
 alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias dss="d status -sb"
-alias cfz="vim ~/.zshrc && source ~/.zshrc"
-alias cfi="vim ~/.config/i3/config"
-alias cfk="vim ~/.config/sxhkd/sxhkdrc"
-alias cfhc="vim scp://root@hassio//config/configuration.yaml"
-alias cfhs="vim scp://root@hassio//config/scenes.yaml"
-alias cfha="vim scp://root@hassio//config/automations.yaml"
+alias cfz="${EDITOR} ~/.zshrc && source ~/.zshrc"
+alias cfi="${EDITOR} ~/.config/i3/config"
+alias cfk="${EDITOR} ~/.config/sxhkd/sxhkdrc"
+alias cfhc="${EDITOR} scp://root@hassio//config/configuration.yaml"
+alias cfhs="${EDITOR} scp://root@hassio//config/scenes.yaml"
+alias cfha="${EDITOR} scp://root@hassio//config/automations.yaml"
+alias la="exa --long --all --header --git"
+alias ll="exa --long --header --git"
+alias kitty-light='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_light.conf ~/.config/kitty/theme.conf'
+alias kitty-dark='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_dark.conf ~/.config/kitty/theme.conf'
 
 export XDG_CONFIG_HOME="$HOME/.config"
 # export BIB="$HOME/Documents/LaTeX/uni.bib"
@@ -355,6 +369,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 # export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 # export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 
 # less/man colors
 export LESS=-R
@@ -375,8 +391,7 @@ if [ -d ~/buntu ] && [ -z "$(ls -A -- ~/buntu)" ]; then sshfs buntu:share ~/bunt
 #  fi
 #fi
 
-# remove <C-s> freezing
-stty -ixon
+# stty erase "^?"
 
 # powerlevel10k
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -384,9 +399,8 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --type f -Hc never'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 if type keychain > /dev/null; then
   eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
 eval "`pip completion --zsh`"
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
