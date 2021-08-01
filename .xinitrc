@@ -63,4 +63,6 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # exec i3
-exec /bin/bspwm
+# exec /bin/bspwm
+# export XDG_CURRENT_DESKTOP=Budgie:GNOME
+# exec budgie-desktop
