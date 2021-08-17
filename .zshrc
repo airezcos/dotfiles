@@ -338,7 +338,7 @@ bindkey -M isearch . self-insert
 #getanames ()  { perl -ne 'while ( m/a name="([^"]*)"/gc ) { print $1, "\n"; }' $* }
 #getforms ()   { perl -ne 'while ( m:(\</?(input|form|select|option).*?\>):gic ) { print $1, "\n"; }' $* }
 #getstrings () { perl -ne 'while ( m/"(.*?)"/gc ) { print $1, "\n"; }' $*}
-#getanchors () { perl -ne 'while ( m/«([^«»\n]+)»/gc ) { print $1, "\n"; }' $* }
+#getanchors () { perl -ne 'while ( m/ï¿½([^ï¿½ï¿½\n]+)ï¿½/gc ) { print $1, "\n"; }' $* }
 #showINC ()    { perl -e 'for (@INC) { printf "%d %s\n", $i++, $_ }' }
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
@@ -355,9 +355,9 @@ alias dss="d status -sb"
 alias cfz="${EDITOR} ~/.zshrc && source ~/.zshrc"
 alias cfi="${EDITOR} ~/.config/i3/config"
 alias cfk="${EDITOR} ~/.config/sxhkd/sxhkdrc"
-alias cfhc="${EDITOR} scp://root@hassio//config/configuration.yaml"
-alias cfhs="${EDITOR} scp://root@hassio//config/scenes.yaml"
-alias cfha="${EDITOR} scp://root@hassio//config/automations.yaml"
+alias cfhc="${EDITOR} scp://root@homeassistant//config/configuration.yaml"
+alias cfhs="${EDITOR} scp://root@homeassistant//config/scenes.yaml"
+alias cfha="${EDITOR} scp://root@homeassistant//config/automations.yaml"
 alias la="exa --long --all --header --git"
 alias ll="exa --long --header --git"
 alias kitty-light='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_light.conf ~/.config/kitty/theme.conf'
