@@ -264,10 +264,21 @@ Plug 'hrsh7th/cmp-path'
 Plug 'f3fora/cmp-spell'
 Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/cmp-emoji'
+" For vsnip users.
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/vim-vsnip'
+" For luasnip users.
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+" Friendly snippets - snippet collection for different languages
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'aaronbieber/vim-quicktask'
 
 Plug 'vimwiki/vimwiki'
+
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 Plug 'aliev/vim-python'
 
@@ -302,56 +313,81 @@ colorscheme gruvbox
 " Neovim LSP
 
 lua << EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
-  cmp.setup({
-    -- snippet = {
-    --   expand = function(args)
-    --     -- For `vsnip` user.
-    --     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+local luasnip = require("luasnip")
+-- Setup nvim-cmp.
 
-    --     -- For `luasnip` user.
-    --     -- require('luasnip').lsp_expand(args.body)
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-    --     -- For `ultisnips` user.
-    --     -- vim.fn["UltiSnips#Anon"](args.body)
-    --   end,
-    -- },
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ['<Tab>'] = function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          fallback()
-        end
+local cmp = require'cmp'
+
+cmp.setup({
+   snippet = {
+     expand = function(args)
+       -- For `vsnip` user.
+       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+
+       -- For `luasnip` user.
+       require('luasnip').lsp_expand(args.body)
+
+       -- For `ultisnips` user.
+       -- vim.fn["UltiSnips#Anon"](args.body)
+     end,
+   },
+  mapping = {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
       end
-    },
-    sources = {
-      { name = 'nvim_lsp' },
+    end, { "i", "s" }),
 
-      -- For vsnip user.
-      -- { name = 'vsnip' },
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
 
-      -- For luasnip user.
-      -- { name = 'luasnip' },
+    -- For vsnip user.
+    -- { name = 'vsnip' },
 
-      -- For ultisnips user.
-      -- { name = 'ultisnips' },
+    -- For luasnip user.
+    { name = 'luasnip' },
 
-      { name = 'buffer' },
-      { name = 'path' },
-      { name = 'calc' },
-      -- { name = 'spell' },
-      { name = 'emoji' },
-      { name = 'latex_symbols' },
-    }
-  })
+    -- For ultisnips user.
+    -- { name = 'ultisnips' },
+
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'calc' },
+    -- { name = 'spell' },
+    { name = 'emoji' },
+    { name = 'latex_symbols' },
+  }
+})
 
 local nvim_lsp = require('lspconfig')
 
@@ -417,6 +453,7 @@ require'lualine'.setup {
   options = {section_separators = { left = '', right = ''}, component_separators = ''}
 }
 -- require'lspconfig'.pyright.setup{}
+require('luasnip.loaders.from_vscode').lazy_load()
 EOF
 
 
@@ -498,12 +535,26 @@ nnoremap <F10> :FloatermToggle<CR>
 tnoremap <F10> <C-\><C-N>:FloatermToggle<CR>
 
 let g:vimwiki_list = [{'path': '~/vimwiki/'},
-                      \ {'path': '~/Documents/Skole/vimwiki/'}]
-"                       \ 'syntax': 'markdown', 'ext': '.md'}]
-hi link VimwikiHeader2 Number
-hi link VimwikiHeader3 Label
-hi link VimwikiHeader4 Special
-hi link VimwikiHeader5 Include
+      \ {'path': '~/Documents/Skole/vimwiki/',
+      \ 'syntax': 'markdown',
+      \ 'ext': 'md',
+      \ 'template_path': '~/Documents/Skole/vimwiki_html/template/',
+      \ 'template_default': 'default',
+      \ 'template_ext': '.htm'}]
+
+au FileType vimwiki set syntax=pandoc
+
+let g:vimwiki_hl_headers = 1
+
+" hi link VimwikiHeader2 Number
+" hi link VimwikiHeader3 Label
+" hi link VimwikiHeader4 Special
+" hi link VimwikiHeader5 Include
+
+hi link markdownH2 Number
+hi link markdownH3 Label
+hi link markdownH4 Special
+hi link markdownH5 Include
 
 let g:tex_flavor = "latex"
 let g:LatexBox_viewer=$READER
@@ -551,6 +602,7 @@ augroup mywiki
   \     { name = 'path' },
   \     { name = 'emoji' },
   \     { name = 'latex_symbols' },
+  \     { name = 'luasnip' },
   \   },
   \ }
 augroup end
