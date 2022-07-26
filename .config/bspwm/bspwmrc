@@ -1,8 +1,9 @@
 #! /bin/sh
 
-xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 -Ff &
 sxhkd &
 nitrogen --restore &
+picom &
+# xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 -Ff &
 
 if [[  ${HOSTNAME} == 'arch-desktop' ]]; then
     ~/.screenlayout/lenovoacer.sh &
