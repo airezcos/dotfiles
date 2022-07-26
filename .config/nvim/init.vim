@@ -21,13 +21,14 @@ set smartcase              "  Do smart case matching
 set splitbelow splitright  "  Open new splits to the right/below
 set termguicolors          "  Enable 24-bit color in TUI
 " set guifont=JetBrainsMono\ Nerd\ Font
-set guifont=SauceCodePro\ Nerd\ Font,MesloLGS\ Nerd\ Font
 
 highlight Normal guibg=NONE ctermbg=NONE
 
 " Neovide stuff
-let g:neovide_cursor_animation_length=0.08
-let g:neovide_cursor_trail_size=0.2
+nmap <C-6> <C-^>
+set guifont=SauceCodePro\ Nerd\ Font,MesloLGS\ Nerd\ Font:h11
+let g:neovide_cursor_animation_length=0.04
+let g:neovide_cursor_trail_size=0.1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Let's give Neovim LSP a try
