@@ -2,8 +2,8 @@ export XCURSOR_THEME=Breeze_Snow
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 # setxkbmap -option caps:super no && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
 # ~/.local/bin/dockToggle
+~/.screenlayout/lenovoacer.sh
 # xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 -Ff &
-xcape -e 'Control_L=Escape'
 xset r rate 300 50
 xset -b
 # ~/.fehbg &
