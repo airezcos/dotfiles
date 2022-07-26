@@ -1,24 +1,25 @@
 let mapleader = ","
 
-" colorscheme solarized     " set colorscheme
-" set showmatch		      " Show matching brackets.
-" set softtabstop=4         " unify
-" set t_Co=256              " enable 256-color mode.
-" set tabstop=4             " tab spacing
-set autowrite		      " Automatically save before commands like :next and :make
-set expandtab             " use spaces instead of tabs
-set hidden		          " Hide buffers when they are abandoned
-set ignorecase            " Make searches case-insensitive.
-set inccommand=nosplit
-set linebreak
-set mouse=a		          " Enable mouse usage (all modes)
-set noshowmode
-set number                " show line numbers
-set scrolloff=5
-set shiftwidth=4          " indent/outdent by 4 columns
-set smartcase		      " Do smart case matching
-set splitbelow splitright
-set termguicolors
+" colorscheme solarized    "  Set colorscheme
+" set showmatch            "  Show matching brackets.
+" set softtabstop=4        "  Unify
+" set t_Co=256             "  Enable 256-color mode.
+" set tabstop=4            "  Tab spacing
+set autowrite              "  Automatically save before commands like :next and :make
+set expandtab              "  Use spaces instead of tabs
+set hidden                 "  Hide buffers when they are abandoned
+set ignorecase             "  Make searches case-insensitive.
+set inccommand=nosplit     "  Preview :substitute effects
+set linebreak              "  Break lines at sane characters
+set mouse=a                "  Enable mouse usage (all modes)
+set noshowmode             "  Mode is handled by statusline
+set number                 "  Show line numbers
+set scrolloff=5            "  Keep cursor 5 lines from window edge
+set shiftwidth=4           "  Indent/outdent by 4 columns
+set signcolumn=number      "  Let signs use number column if available
+set smartcase              "  Do smart case matching
+set splitbelow splitright  "  Open new splits to the right/below
+set termguicolors          "  Enable 24-bit color in TUI
 " set guifont=JetBrainsMono\ Nerd\ Font
 set guifont=SauceCodePro\ Nerd\ Font,MesloLGS\ Nerd\ Font
 
