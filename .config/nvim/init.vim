@@ -226,8 +226,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Distraction-free writing in Vim
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+" Trying TrueZen as a replacement for Goyo
+Plug 'Pocco81/TrueZen.nvim'
 
 " Pencil, for writing prose
 Plug 'reedes/vim-pencil'
@@ -255,6 +257,8 @@ Plug 'tpope/vim-commentary'
 " Flake8 plugin for Vim
 " Plug 'nvie/vim-flake8'
 
+Plug 'folke/which-key.nvim'
+
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig' 
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
@@ -267,11 +271,11 @@ Plug 'f3fora/cmp-spell'
 Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/cmp-emoji'
 " For vsnip users.
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 " For luasnip users.
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
 " Friendly snippets - snippet collection for different languages
 Plug 'rafamadriz/friendly-snippets'
 
@@ -303,7 +307,17 @@ Plug 'tyru/open-browser.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'scrooloose/vim-slumlord'
 
+" Grammar checking with LanguageTool
+Plug 'rhysd/vim-grammarous'
+
+" Colorcode preview
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+" Plug 'norcalli/nvim-colorizer.lua'
+
 call plug#end()
+
+" Need to reset shortmess for swapfiles after vim-polyglot removes it
+set shortmess-=A
 
 colorscheme gruvbox
 " colorscheme jellybeans
@@ -320,7 +334,10 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local luasnip = require("luasnip")
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+-- local luasnip = require("luasnip")
 -- Setup nvim-cmp.
 
 -- Add additional capabilities supported by nvim-cmp
@@ -333,10 +350,10 @@ cmp.setup({
    snippet = {
      expand = function(args)
        -- For `vsnip` user.
-       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
 
        -- For `luasnip` user.
-       require('luasnip').lsp_expand(args.body)
+       -- require('luasnip').lsp_expand(args.body)
 
        -- For `ultisnips` user.
        -- vim.fn["UltiSnips#Anon"](args.body)
@@ -347,48 +364,53 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      elseif vim.fn["vsnip#available"](1) == 1 then
+        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      -- -- elseif luasnip.expand_or_jumpable() then
+      --   -- luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else
-        fallback()
+        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
     end, { "i", "s" }),
 
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        feedkey("<Plug>(vsnip-jump-prev)", "")
+      -- elseif luasnip.jumpable(-1) then
+        -- luasnip.jump(-1)
       else
         fallback()
       end
     end, { "i", "s" }),
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
 
     -- For vsnip user.
-    -- { name = 'vsnip' },
+    { name = 'vsnip' },
 
     -- For luasnip user.
-    { name = 'luasnip' },
+    -- { name = 'luasnip' },
 
     -- For ultisnips user.
     -- { name = 'ultisnips' },
 
+  }, {
     { name = 'buffer' },
     { name = 'path' },
     { name = 'calc' },
     -- { name = 'spell' },
     { name = 'emoji' },
     { name = 'latex_symbols' },
-  }
+  })
 })
 
 local nvim_lsp = require('lspconfig')
@@ -454,10 +476,36 @@ cmp.setup {
 require'lualine'.setup {
   options = {section_separators = { left = '', right = ''}, component_separators = ''}
 }
+require("which-key").setup {}
+require("true-zen").setup {}
 -- require'lspconfig'.pyright.setup{}
-require('luasnip.loaders.from_vscode').lazy_load()
+-- require('luasnip.loaders.from_vscode').lazy_load()
 EOF
 
+" VSnip Mappings
+
+" " NOTE: You can use other key to expand snippet.
+
+" " Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" " Expand or jump
+" imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" " Jump forward or backward
+" imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+" smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+" imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+" nmap        s   <Plug>(vsnip-select-text)
+" xmap        s   <Plug>(vsnip-select-text)
+" nmap        S   <Plug>(vsnip-cut-text)
+" xmap        S   <Plug>(vsnip-cut-text)
 
 " fzf mappings
 " Mapping selecting mappings
@@ -604,18 +652,22 @@ augroup mywiki
   \     { name = 'path' },
   \     { name = 'emoji' },
   \     { name = 'latex_symbols' },
-  \     { name = 'luasnip' },
+  \     { name = 'vsnip' },
+  \     { name = 'calc' },
   \   },
   \ }
 augroup end
-" Temporary autocomands for school
-" au BufReadPost Innsending*.wiki call Prose()
-" function! Prose()
-"     if !exists("proseactive")
-"         let g:proseactive = 1
-"         call pencil#init()
-"         Goyo
-"         setlocal spelllang=nb
-"         setlocal spell
-"     endif
-" endfunction
+
+let g:grammarous#languagetool_cmd = 'languagetool'
+
+" Hexokinase Colorcode highlight
+" All possible values
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\     'colour_names'
+\ ]
