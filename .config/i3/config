@@ -228,3 +228,4 @@ bar {
 bindsym $mod+Shift+Delete exec "~/.local/bin/i3cmds/blur-lock && systemctl suspend"
 exec xautolock -time 15 -locker '~/.local/bin/i3cmds/blur-lock' &
 exec --no-startup-id compton -f
+exec sxhkd
