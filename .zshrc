@@ -348,6 +348,8 @@ autoload -U compinit
 
 bindkey -v
 
+pz() { pacman -Slq | fzf --multi --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk "{print \$2}")' | xargs -ro sudo pacman -S }
+
 alias gss="git status -sb"
 alias gcam="git commit -am"
 alias d="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
