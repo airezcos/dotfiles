@@ -364,11 +364,12 @@ alias la="exa --long --all --header --git --icons --group-directories-first"
 alias ll="exa --long --header --git --icons --group-directories-first"
 alias kitty-light='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_light.conf ~/.config/kitty/theme.conf'
 alias kitty-dark='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_dark.conf ~/.config/kitty/theme.conf'
+alias wiki='nvim -c "cd ~/vimwiki" -c VimwikiIndex'
 
 export XDG_CONFIG_HOME="$HOME/.config"
 # export BIB="$HOME/Documents/LaTeX/uni.bib"
 # export REFER="$HOME/Documents/referbib"
-export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+# export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 # export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 # export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export MANPAGER='nvim +Man!'
@@ -405,4 +406,7 @@ if type keychain > /dev/null; then
   eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
 eval "`pip completion --zsh`"
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+# To use starship you need to uninstall grml-zsh-config
+# eval "$(starship init zsh)"
