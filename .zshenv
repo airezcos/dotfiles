@@ -10,3 +10,4 @@ export FILE="pcmanfm"
 export FZF_DEFAULT_COMMAND='fd --type f -E .git -Hc never'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export TODOIST_API_KEY="$(pass Todoist/API)"
+export EXA_ICON_SPACING=2

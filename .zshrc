@@ -360,8 +360,8 @@ alias cfk="${EDITOR} ~/.config/sxhkd/sxhkdrc"
 alias cfhc="${EDITOR} scp://root@homeassistant//config/configuration.yaml"
 alias cfhs="${EDITOR} scp://root@homeassistant//config/scenes.yaml"
 alias cfha="${EDITOR} scp://root@homeassistant//config/automations.yaml"
-alias la="exa --long --all --header --git"
-alias ll="exa --long --header --git"
+alias la="exa --long --all --header --git --icons --group-directories-first"
+alias ll="exa --long --header --git --icons --group-directories-first"
 alias kitty-light='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_light.conf ~/.config/kitty/theme.conf'
 alias kitty-dark='ln -sf ~/.config/kitty/kitty-themes/themes/gruvbox_dark.conf ~/.config/kitty/theme.conf'
 
