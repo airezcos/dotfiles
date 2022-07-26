@@ -584,6 +584,29 @@ imap <C-H> <C-G>u<Esc>[s1z=`]a<C-G>u
 nnoremap <F10> :FloatermToggle<CR>
 tnoremap <F10> <C-\><C-N>:FloatermToggle<CR>
 
+" Zotero citation
+function! ZoteroCite()
+  " pick a format based on the filetype (customize at will)
+  let format = &filetype =~ '.md' ? 'citep' : 'pandoc'
+  let api_call = 'http://127.0.0.1:23119/better-bibtex/cayw?format='.format.'&brackets=1'
+  let ref = system('curl -s '.shellescape(api_call))
+  return ref
+endfunction
+
+noremap <leader>z "=ZoteroCite()<CR>p
+inoremap <C-z> <C-r>=ZoteroCite()<CR>
+
+let g:vimwiki_syntax = 'markdown'
+let g:vimwiki_ext = '.md'
+let g:vimwiki_automatic_nested_syntaxes = 1
+let g:vimwiki_links_space_char = '_'
+
+if executable('vimwiki_markdown')
+  let g:vimwiki_custom_wiki2html = 'vimwiki_markdown'
+  let g:vimwiki_template_path = '~/vimwiki/template/'
+  let g:vimwiki_template_ext = '.tpl'
+endif
+
 let g:vimwiki_list = [{'path': '~/vimwiki/'},
       \ {'path': '~/Documents/Skole/vimwiki/',
       \ 'syntax': 'markdown',
@@ -640,13 +663,26 @@ endfun
 com! -nargs=1 -complete=custom,s:lightlineColorschemes LightlineColorscheme
             \ call s:setLightlineColorscheme(<q-args>)
 
+function Texify()
+    if !exists("texifycheck")
+        let g:texifycheck = 1
+        s/\(\d\)\.\(\d\)/\1,\2/ge
+        s/\s\*\s/ \\cdot /ge
+        s/(/ \\left( /ge
+        s/)/ \\right) /ge
+        s/\(\d\+\)\/\(\d\+\)/\\frac\{\1\}\{\2\}/ge
+    endif
+endfunction
+command! -range Texify <line1>,<line2>call Texify()
+
+
 augroup mywiki
   autocmd!
   autocmd FileType vimwiki setlocal spelllang=nb
   autocmd FileType vimwiki setlocal spell
   autocmd FileType vimwiki setlocal nonumber
   " autocmd FileType vimwiki Goyo
-  autocmd FileType vimwiki call pencil#init()
+  " autocmd FileType vimwiki call pencil#init()
   autocmd FileType vimwiki lua require'cmp'.setup.buffer {
   \   sources = {
   \     { name = 'path' },
