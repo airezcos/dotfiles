@@ -30,8 +30,11 @@ super + u
 # 	tutorialvids
 # super + w
 # 	webby | xargs -r $BROWSER
-super + {_,shift + }w
-	$BROWSER {_,-P skole }
+super + w
+	$BROWSER 
+
+super + shift + w
+  schoolweb.sh
 # super + shift + g
 # 	gimp
 super + p
