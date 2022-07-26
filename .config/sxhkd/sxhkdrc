@@ -44,7 +44,7 @@ super + p
 # 	fuzzy_win fuzzy_cmd
 
 ctrl + alt + l
-  betterlockscreen -l
+  betterlockscreen -l &; sleep 3; xset dpms force off
 
 ctrl + alt + s
   systemctl suspend
